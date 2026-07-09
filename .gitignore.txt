@@ -1,0 +1,26 @@
+# Eclipse
+.metadata/
+.project
+.classpath
+.settings/
+
+# STS
+.springBeans
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Maven
+target/
+**/target/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
