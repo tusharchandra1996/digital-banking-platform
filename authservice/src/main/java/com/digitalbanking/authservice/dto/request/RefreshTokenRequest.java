@@ -1,11 +1,19 @@
 package com.digitalbanking.authservice.dto.request;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
 
-@Data
 public class RefreshTokenRequest {
 
+    @NotBlank
     private String refreshToken;
 
-    private String deviceId;
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(
+            String refreshToken
+    ) {
+        this.refreshToken = refreshToken;
+    }
 }

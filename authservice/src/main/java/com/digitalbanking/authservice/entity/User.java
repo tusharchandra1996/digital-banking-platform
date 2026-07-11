@@ -74,6 +74,9 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	@Column(name = "last_login")
+	private LocalDateTime lastLogin;
+
 	@PrePersist
 	public void prePersist() {
 		LocalDateTime now = LocalDateTime.now();
@@ -221,5 +224,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public LocalDateTime getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(LocalDateTime lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }

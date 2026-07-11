@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalbanking.authservice.dto.common.ApiResponse;
+import com.digitalbanking.authservice.dto.request.LoginRequest;
+import com.digitalbanking.authservice.dto.request.RefreshTokenRequest;
 import com.digitalbanking.authservice.dto.request.RegisterRequest;
+import com.digitalbanking.authservice.dto.response.LoginResponse;
+import com.digitalbanking.authservice.dto.response.RefreshTokenResponse;
 import com.digitalbanking.authservice.dto.response.RegisterResponse;
 import com.digitalbanking.authservice.service.AuthService;
 import com.digitalbanking.authservice.util.CorrelationIdUtil;
@@ -31,18 +35,33 @@ public class AuthController {
 	public ResponseEntity<ApiResponse<RegisterResponse>> register(@Valid @RequestBody RegisterRequest request,
 			HttpServletRequest httpRequest) {
 		String correlationId = CorrelationIdUtil.getCorrelationId(httpRequest);
-		System.out.println("correlationId=="+correlationId);
+		System.out.println("correlationId==" + correlationId);
 		RegisterResponse response = authService.register(request, correlationId);
-
 		ApiResponse<RegisterResponse> apiResponse = ApiResponse.success(correlationId, "User registered successfully",
 				response);
-
 		return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
 	}
 
-	// POST /api/auth/login
+	@PostMapping("/login")
+	public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request,
+			HttpServletRequest httpRequest) {
+		String correlationId = CorrelationIdUtil.getCorrelationId(httpRequest);
+		System.out.println("correlationId==" + correlationId);
+		LoginResponse response = authService.login(request, correlationId);
+		ApiResponse<LoginResponse> apiResponse = ApiResponse.success(correlationId, "User login successfully",
+				response);
+		return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
-	// POST /api/auth/refresh-token
+	}
+
+	@PostMapping("/refresh")
+	public ResponseEntity<ApiResponse<RefreshTokenResponse>> refreshToken(
+			@Valid @RequestBody RefreshTokenRequest request, HttpServletRequest httpRequest) {
+
+		String correlationId = CorrelationIdUtil.getCorrelationId(httpRequest);
+		RefreshTokenResponse response = authService.refreshToken(request, correlationId);
+		return ResponseEntity.ok(ApiResponse.success(correlationId, "Token refreshed successfully", response));
+	}
 
 	// POST /api/auth/logout
 

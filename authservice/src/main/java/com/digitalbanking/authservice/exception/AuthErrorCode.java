@@ -22,8 +22,22 @@ public enum AuthErrorCode {
 	USER_REGISTRATION_FAILED("AUTH-1013", "Failed to create user account", HttpStatus.INTERNAL_SERVER_ERROR),
 
 	VALIDATION_FAILED("AUTH-0001", "Request validation failed", HttpStatus.BAD_REQUEST),
+	REFRESH_TOKEN_INVALID("AUTH-3002", "Refresh token is invalid", HttpStatus.UNAUTHORIZED),
 
-	INTERNAL_SERVER_ERROR("AUTH-9999", "Internal authentication service error", HttpStatus.INTERNAL_SERVER_ERROR);
+	REFRESH_TOKEN_EXPIRED("AUTH-3003", "Refresh token expired", HttpStatus.UNAUTHORIZED),
+
+	REFRESH_TOKEN_REVOKED("AUTH-3004", "Refresh token revoked", HttpStatus.UNAUTHORIZED),
+	INTERNAL_SERVER_ERROR("AUTH-9999", "Internal authentication service error", HttpStatus.INTERNAL_SERVER_ERROR),
+
+	INVALID_CREDENTIALS("AUTH-2003", "Invalid username or password", HttpStatus.UNAUTHORIZED),
+
+	USER_ACCOUNT_DISABLED("AUTH-2006", "User account is disabled", HttpStatus.FORBIDDEN),
+
+	USER_ACCOUNT_LOCKED("AUTH-2007", "User account is locked", HttpStatus.FORBIDDEN),
+
+	USER_ACCOUNT_INACTIVE("AUTH-2008", "User account is inactive", HttpStatus.FORBIDDEN),
+
+	TOKEN_GENERATION_FAILED("AUTH-2012", "Failed to generate token", HttpStatus.INTERNAL_SERVER_ERROR);
 
 	private final String code;
 	private final String message;
